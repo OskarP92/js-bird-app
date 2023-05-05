@@ -1,5 +1,8 @@
 body {
+    font-family: 'Anuphan', sans-serif;
     color: rgb(36, 32, 32);
     text-align: center;
+    line-height: 40px;
+    background-color: rgb(249, 246, 211);
 }
 
