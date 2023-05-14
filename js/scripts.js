@@ -18,6 +18,7 @@ let pokemonList = [
     }
 ];
 
+/*
 // loop that goes through the array starting at 0 index
 for (let i = 0; i < pokemonList.length; i++) {
 
@@ -31,4 +32,13 @@ for (let i = 0; i < pokemonList.length; i++) {
 
 // add line break between list items
     document.write('<br>');
-}
+}*/
+
+
+// forEach loop to iterate over pokemonList array with pokemon as a parameter 
+pokemonList.forEach(function(pokemon){
+    document.write('<br>' + pokemon.name + ' ' + pokemon.height)
+        if(pokemon.height > 0.6) {
+            document.write (' - Wow! That\'s big!');
+        }
+});
