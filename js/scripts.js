@@ -27,17 +27,30 @@ let pokemonRepository = (function () {
         return pokemonList;
     } 
 
+    function addListItem(pokemon) {
+        let pokemonUnorderedList = document.querySelector('.pokemon-list');
+
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = (pokemon.name);
+        button.classList.add('my-button');
+        listItem.appendChild(button);
+        pokemonUnorderedList.appendChild(listItem);
+    }
+
     return {
         add: add,
-        getAll: getAll
+        getAll: getAll,
+        addListItem: addListItem
     };
+
+    
+
 })(); 
 
 // forEach loop that accesses pokemonList via getAll function 
 pokemonRepository.getAll().forEach(function(pokemon){
-    document.write('<br>' + pokemon.name + ' ' + pokemon.height)
-    if(pokemon.height > 0.6) {
-        document.write (' - Wow! That\'s big!');
-    }
+    pokemonRepository.addListItem(pokemon);
+    
 });
 
