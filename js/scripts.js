@@ -27,6 +27,11 @@ let pokemonRepository = (function () {
         return pokemonList;
     } 
 
+    //function that logs pokemon to console
+    //function showDetails(pokemon) {
+     //   console.log(pokemon);
+   // }
+
     function addListItem(pokemon) {
         let pokemonUnorderedList = document.querySelector('.pokemon-list');
 
@@ -36,7 +41,19 @@ let pokemonRepository = (function () {
         button.classList.add('my-button');
         listItem.appendChild(button);
         pokemonUnorderedList.appendChild(listItem);
-    }
+
+        // showDetails called after click
+        //button.addEventListener('click', showDetails(pokemon) );
+   
+
+        // this works - but the showDetails function does not
+        button.addEventListener('click', function() {
+            console.log(pokemon);
+        } );
+    
+    };
+    
+    
 
     return {
         add: add,
