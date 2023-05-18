@@ -1,22 +1,23 @@
 let pokemonRepository = (function () {
     // wrapped listArray in IIFE to avoid accidentally accessing global state
     let pokemonList = [
-        {
-            name: 'Bulbasaur',
-            height: 0.7,
-            type: ['grass', 'posion'],
-        },
-        {
-            name: 'Charmander',
-            height: 0.6,
-            type: ['fire'],
-        },
-        {
-            name: 'Squirtle',
-            height: 0.5,
-            type: ['water'],
-        }
+        // {
+        //     name: 'Bulbasaur',
+        //     height: 0.7,
+        //     type: ['grass', 'posion'],
+        // },
+        // {
+        //     name: 'Charmander',
+        //     height: 0.6,
+        //     type: ['fire'],
+        // },
+        // {
+        //     name: 'Squirtle',
+        //     height: 0.5,
+        //     type: ['water'],
+        // }
     ];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     // return object with getAll and add functions assigned as keys
     function add(pokemon) {
@@ -52,22 +53,43 @@ let pokemonRepository = (function () {
         } );
     
     };
+
+
+    function loadList() {
+        return fetch(apiUrl).then(function(response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+
     
     
 
     return {
         add: add,
         getAll: getAll,
-        addListItem: addListItem
+       // addListItem: addListItem
+       loadList: loadList
     };
 
     
 
 })(); 
 
+pokemonRepository.loadList().then(function() {
 // forEach loop that accesses pokemonList via getAll function 
 pokemonRepository.getAll().forEach(function(pokemon){
     pokemonRepository.addListItem(pokemon);
-    
+});
 });
 
