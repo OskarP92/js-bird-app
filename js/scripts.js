@@ -29,9 +29,12 @@ let pokemonRepository = (function () {
     } 
 
     //function that logs pokemon to console
-    //function showDetails(pokemon) {
-     //   console.log(pokemon);
-   // }
+//     function showDetails(pokemon) {
+//         loadDetails(pokemon).then(function() {
+//          console.log(pokemon);   
+//         });
+       
+//    }
 
     function addListItem(pokemon) {
         let pokemonUnorderedList = document.querySelector('.pokemon-list');
@@ -49,7 +52,9 @@ let pokemonRepository = (function () {
 
         // this works - but the showDetails function does not
         button.addEventListener('click', function() {
-            console.log(pokemon);
+            loadDetails(pokemon).then(function() {
+             console.log(pokemon);   
+ });
         } );
     
     };
@@ -71,6 +76,20 @@ let pokemonRepository = (function () {
         })
     }
 
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            //Now we add the details to the item
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function (e) {
+            console.error(e);
+        });
+    }
+
 
     
     
@@ -78,8 +97,9 @@ let pokemonRepository = (function () {
     return {
         add: add,
         getAll: getAll,
-       // addListItem: addListItem
-       loadList: loadList
+       addListItem: addListItem,
+       loadList: loadList,
+       loadDetails: loadDetails
     };
 
     
