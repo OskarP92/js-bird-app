@@ -1,21 +1,7 @@
 let pokemonRepository = (function () {
     // wrapped listArray in IIFE to avoid accidentally accessing global state
     let pokemonList = [
-        // {
-        //     name: 'Bulbasaur',
-        //     height: 0.7,
-        //     type: ['grass', 'posion'],
-        // },
-        // {
-        //     name: 'Charmander',
-        //     height: 0.6,
-        //     type: ['fire'],
-        // },
-        // {
-        //     name: 'Squirtle',
-        //     height: 0.5,
-        //     type: ['water'],
-        // }
+
     ];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -29,16 +15,15 @@ let pokemonRepository = (function () {
     } 
 
     //function that logs pokemon to console
-//     function showDetails(pokemon) {
-//         loadDetails(pokemon).then(function() {
-//          console.log(pokemon);   
-//         });
+     function showDetails(pokemon) {
+         loadDetails(pokemon).then(function() {
+          console.log(pokemon);   
+         });
        
-//    }
+   }
 
     function addListItem(pokemon) {
         let pokemonUnorderedList = document.querySelector('.pokemon-list');
-
         let listItem = document.createElement('li');
         let button = document.createElement('button');
         button.innerText = (pokemon.name);
@@ -47,19 +32,21 @@ let pokemonRepository = (function () {
         pokemonUnorderedList.appendChild(listItem);
 
         // showDetails called after click
-        //button.addEventListener('click', showDetails(pokemon) );
-   
-
-        // this works - but the showDetails function does not
         button.addEventListener('click', function() {
-            loadDetails(pokemon).then(function() {
-             console.log(pokemon);   
- });
-        } );
-    
+            showDetails(pokemon);
+         } );
+   
     };
 
+     //function that logs pokemon to console
+     function showDetails(pokemon) {
+         loadDetails(pokemon).then(function() {
+          console.log(pokemon);   
+         });
+       
+   };
 
+// function that uses fetch to GET pokemon list
     function loadList() {
         return fetch(apiUrl).then(function(response) {
             return response.json();
@@ -76,6 +63,7 @@ let pokemonRepository = (function () {
         })
     }
 
+    // function that GETs pokemon details 
     function loadDetails(item) {
         let url = item.detailsUrl;
         return fetch(url).then(function (response) {
