@@ -1,8 +1,14 @@
 let pokemonRepository = (function () {
+
+
+    // define modalContainer declared globally in the IIFE to follow the DRY principle 
+    let modalContainer = document.querySelector('#modal-container');
+
     // wrapped listArray in IIFE to avoid accidentally accessing global state
     let pokemonList = [
 
     ];
+
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     // return object with getAll and add functions assigned as keys
@@ -12,15 +18,66 @@ let pokemonRepository = (function () {
 
     function getAll() {
         return pokemonList;
-    } 
+    }
 
     //function that logs pokemon to console
-     function showDetails(pokemon) {
-         loadDetails(pokemon).then(function() {
-          console.log(pokemon);   
-         });
-       
-   }
+    function showDetails(pokemon) {
+        loadDetails(pokemon).then(function () {
+
+            // select modal-container div, add is-visible class, clear any content
+            modalContainer.classList.add('is-visible');
+            modalContainer.innerHTML = '';
+
+            // create .modal div 
+            let modal = document.createElement('div');
+            modal.classList.add('modal');
+
+            // create close button
+            let closeButton = document.createElement('button');
+            closeButton.classList.add('close-modal');
+            closeButton.innerText = 'X';
+            closeButton.addEventListener('click', hideModal);
+
+            // create h1 element to display name
+            let titleElement = document.createElement('h1');
+            titleElement.innerText = pokemon.name;
+
+            // create p element to display height
+            let heightElement = document.createElement('p');
+            heightElement.innerText = 'Height: ' + pokemon.height;
+
+            // create img element 
+            let imageElement = document.createElement('img');
+            imageElement.src = pokemon.imageUrl;
+
+            // append elements to parents
+            modal.appendChild(closeButton);
+            modal.appendChild(titleElement);
+            modal.appendChild(heightElement);
+            modal.appendChild(imageElement);
+            modalContainer.appendChild(modal);
+
+            // listen for clicks on the container to close modal
+            modalContainer.addEventListener('click', (e) => {
+                let target = e.target;
+                if (target === modalContainer) {
+                    hideModal();
+                }
+            });
+        });
+    }
+
+    // remove is-visible class 
+    function hideModal() {
+        modalContainer.classList.remove('is-visible')
+    }
+
+    // declare that modalContainer must be visible for Esc key to close it
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+            hideModal();
+        }
+    });
 
     function addListItem(pokemon) {
         let pokemonUnorderedList = document.querySelector('.pokemon-list');
@@ -32,23 +89,15 @@ let pokemonRepository = (function () {
         pokemonUnorderedList.appendChild(listItem);
 
         // showDetails called after click
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             showDetails(pokemon);
-         } );
-   
+        });
+
     };
 
-     //function that logs pokemon to console
-     function showDetails(pokemon) {
-         loadDetails(pokemon).then(function() {
-          console.log(pokemon);   
-         });
-       
-   };
-
-// function that uses fetch to GET pokemon list
+    // function that uses fetch to GET pokemon list
     function loadList() {
-        return fetch(apiUrl).then(function(response) {
+        return fetch(apiUrl).then(function (response) {
             return response.json();
         }).then(function (json) {
             json.results.forEach(function (item) {
@@ -78,26 +127,20 @@ let pokemonRepository = (function () {
         });
     }
 
-
-    
-    
-
     return {
         add: add,
         getAll: getAll,
-       addListItem: addListItem,
-       loadList: loadList,
-       loadDetails: loadDetails
+        addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails
     };
 
     
+})();
 
-})(); 
-
-pokemonRepository.loadList().then(function() {
-// forEach loop that accesses pokemonList via getAll function 
-pokemonRepository.getAll().forEach(function(pokemon){
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function () {
+    // forEach loop that accesses pokemonList via getAll function 
+    pokemonRepository.getAll().forEach(function (pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
-});
-
