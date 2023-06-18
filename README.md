@@ -10,7 +10,9 @@ Search for a specific Pokemon or simply click on any Pokemon to open a modal tha
 
 ### Project Dependencies 
 [Bootstrap](https://getbootstrap.com/)
+
 [ESLint](https://eslint.org/)
+
 Polyfills
 - [Fetch](https://github.com/pleplu/js-app/blob/main/js/fetch-polyfill.js)
 - [Promise](https://github.com/taylorhakes/promise-polyfill)
