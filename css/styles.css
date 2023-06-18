@@ -1,33 +1,119 @@
 body {
-    font-family: 'Anuphan', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     color: rgb(36, 32, 32);
     text-align: center;
     line-height: 40px;
-    background-color: rgb(249, 246, 211);
+    background-color: #f5f1f1;
+}
+
+nav {
+    background-color: #3b4cca;
+}
+
+.nav-item a,
+.navbar-brand {
+    color: #fff;
+    transition-duration: 0.5s;
+    transition-property: opacity;
+}
+
+.nav-item a:hover,
+.navbar-brand:hover {
+    color: #fff;
+    opacity: 0.7;
+}
+
+.nav-item.active a {
+    color: #ffde00;
 }
 
 .pokedex__container {
     max-width: 700px;
-    margin: 100px auto 0;
+    margin: 100px auto;
 }
 
 .pokemon-list {
     list-style-type: none;
     padding: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.pokemon-list li {
+    flex-basis: 0;
+    flex-grow: 1;
 }
 
 .list-group-item {
-    background-color: rgb(249, 246, 211);
-    border:none;
+    background-color: transparent;
+    border: none;
 }
 
-.my-button {
-    background-color: red;
-    color: white;
-    padding:10px;
-    margin: 0;
-    width:100%;
+.btn-primary {
+    border-radius: 10px;
+    border-color: #3b4cca;
+    border-width: 2px;
+    background-color: #ffde00;
+    color: #3b4cca;
 }
 
+.ptop {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.ptop:hover {
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+}
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.modal-content {
+    border-radius: 20px;
+    padding: 20px;
+    background-image: linear-gradient(#ffde00, #ffde00);
+}
+
+.modal-content h1 {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.modal-footer {
+    border-top: 3px solid #000;
+}
+
+.modal-header {
+    border-bottom: 3px solid #000;
+}
+
+.btn-secondary {
+    background-color: #3a4cca;
+    transition-duration: 0.3s;
+    transition-property: opacity;
+}
+
+.btn-secondary:hover {
+    background-color: #3a4cca;
+    opacity: 0.8;
+}
+
+.info {
+    text-align: left;
+}
