@@ -1,3 +1,5 @@
+/* main structure */
+
 body {
     font-family: 'Roboto Condensed', sans-serif;
     color: rgb(36, 32, 32);
@@ -6,31 +8,34 @@ body {
     background-color: #f5f1f1;
 }
 
-nav {
-    background-color: #3b4cca;
-}
-
-.nav-item a,
-.navbar-brand {
-    color: #fff;
-    transition-duration: 0.5s;
-    transition-property: opacity;
-}
-
-.nav-item a:hover,
-.navbar-brand:hover {
-    color: #fff;
-    opacity: 0.7;
-}
-
-.nav-item.active a {
-    color: #ffde00;
-}
-
 .pokedex__container {
     max-width: 700px;
     margin: 100px auto;
 }
+
+/* navigation */
+
+nav {
+    background-color: #3b4cca;
+}
+
+
+.navbar-brand {
+    color: #fff;
+    opacity: 0.8;
+    transition-duration: 0.5s;
+    transition-property: opacity;
+}
+
+
+.navbar-brand:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+
+
+/* js generated list items */
 
 .pokemon-list {
     list-style-type: none;
@@ -58,6 +63,8 @@ nav {
     color: #3b4cca;
 }
 
+/* spinning pokeball */
+
 .ptop {
     height: 50px;
     margin-right: 20px;
@@ -84,6 +91,8 @@ nav {
         transform: rotate(360deg);
     }
 }
+
+/* modal styling */
 
 .modal-content {
     border-radius: 20px;
@@ -113,6 +122,8 @@ nav {
     background-color: #3a4cca;
     opacity: 0.8;
 }
+
+/* about page style */
 
 .info {
     text-align: left;
